@@ -5,7 +5,7 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -19,7 +19,24 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app-enums": [
+        "src/app/shared/enums/"
+      ],
+      "@app-models": [
+        "src/app/shared/models/"
+      ],
+      "@app-services": [
+        "src/app/core/services/"
+      ],
+      "@app-directives": [
+        "src/app/core/directives/"
+      ],
+      "@app-pipes": [
+        "src/app/core/pipe/"
+      ],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
