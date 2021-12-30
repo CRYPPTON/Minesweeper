@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Choose Level</mat-label>
+        <mat-select (selectionChange)="setBorderSize($event)">
+          <mat-option *ngFor="let diff of gameDifficult" [value]="diff.size">
+            {{ diff.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>Unmarked: </div>
+    </div>
+    <div class="col-8">
+      <app-game-table [selectedDifficult]="selectedDifficult"></app-game-table>
+    </div>
+  </div>
+</div>

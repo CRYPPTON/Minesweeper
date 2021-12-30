@@ -8,9 +8,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
+  //#region Class properties
+
+  title = 'minesweeper';
+
+  //#endregion
+
   constructor(private translateService: TranslateService){
     translateService.setDefaultLang('en');
   }
 
-  title = 'minesweeper';
 }
