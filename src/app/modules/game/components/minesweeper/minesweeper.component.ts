@@ -15,7 +15,7 @@ export class MinesweeperComponent implements OnInit {
   gameDifficult: GameLevel[] = [
     { name: "easy", size: 6, mine: 5 },
     { name: "medium", size: 9, mine: 10 },
-    { name: "Hard", size: 16, mine: 20 }
+    { name: "hard", size: 16, mine: 20 }
   ];
 
   //#endregion
