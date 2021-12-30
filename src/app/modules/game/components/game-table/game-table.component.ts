@@ -8,7 +8,7 @@ import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angu
 export class GameTableComponent implements AfterViewInit, OnChanges {
   @Input() selectedDifficult: number;
 
-  constructor() {}
+  constructor() { }
 
   //#region Life cycle hooks
 
@@ -16,7 +16,7 @@ export class GameTableComponent implements AfterViewInit, OnChanges {
     this.initBorderSize();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.initBorderSize();
   }
 

@@ -6,6 +6,7 @@ import { MinesweeperComponent } from './components/minesweeper/minesweeper.compo
 import { GameTableComponent } from './components/game-table/game-table.component';
 import { SingleGameFieldsComponent } from './components/single-game-fields/single-game-fields.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     GameRoutingModule,
     SharedModule,
+    TranslateModule
   ]
 })
 export class GameModule { }
