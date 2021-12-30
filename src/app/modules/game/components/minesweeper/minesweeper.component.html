@@ -1,17 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-4">
-      <mat-form-field appearance="fill">
-        <mat-label>Choose Level</mat-label>
+<div class="d-flex justify-content-center container">
+  <div class="minesweeper-game">
+    <div>
+      <mat-form-field class="d-flex justify-content-center" appearance="fill">
+        <mat-label>{{ "labels.choose-difficult" | translate }}</mat-label>
         <mat-select (selectionChange)="setBorderSize($event)">
           <mat-option *ngFor="let diff of gameDifficult" [value]="diff.size">
-            {{ diff.name }}
+            {{ diff.name | translate }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div>Unmarked: </div>
+      <div>{{ "labels.unmarked" | translate }}:</div>
     </div>
-    <div class="col-8">
+    <div>
       <app-game-table [selectedDifficult]="selectedDifficult"></app-game-table>
     </div>
   </div>
