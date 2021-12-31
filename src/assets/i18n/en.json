@@ -1,0 +1,10 @@
+{
+  "title": "Minesweeper",
+  "labels": {
+    "choose-difficult": "Choose difficult",
+    "unmarked": "Unmarked"
+  },
+  "easy": "Easy",
+  "medium": "Medium",
+  "hard": "Hard"
+}

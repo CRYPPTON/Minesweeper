@@ -1,0 +1,10 @@
+{
+  "title": "Minesweeper",
+  "labels": {
+    "choose-difficult": "Izaberite tezinu",
+    "unmarked": "Neobelezeno"
+  },
+  "easy": "Lako",
+  "medium": "Srednje",
+  "hard": "Tesko"
+}
