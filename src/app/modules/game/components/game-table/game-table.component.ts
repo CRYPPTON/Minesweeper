@@ -6,7 +6,7 @@ import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angu
   styleUrls: ['./game-table.component.scss']
 })
 export class GameTableComponent implements AfterViewInit, OnChanges {
-  @Input() selectedDifficult: number;
+  @Input() selectedDifficulty: number;
 
   constructor() { }
 
@@ -26,8 +26,8 @@ export class GameTableComponent implements AfterViewInit, OnChanges {
 
   private initBorderSize(): void {
     const element = (document.querySelector('.game-table') as HTMLElement);
-    element.style.gridTemplateColumns = `repeat(${this.selectedDifficult}, 1fr)`;
-    element.style.gridTemplateRows = `repeat(${this.selectedDifficult}, 1fr)`
+    element.style.gridTemplateColumns = `repeat(${this.selectedDifficulty}, 1fr)`;
+    element.style.gridTemplateRows = `repeat(${this.selectedDifficulty}, 1fr)`
   }
 
   //#endregion

@@ -10,7 +10,7 @@ export class MinesweeperComponent implements OnInit {
 
   //#region Class properties
 
-  selectedDifficult: number;
+  selectedDifficulty: number;
 
   gameDifficult: GameLevel[] = [
     { name: "easy", size: 6, mine: 5 },
@@ -33,7 +33,7 @@ export class MinesweeperComponent implements OnInit {
   //#region Init methods
 
   private initSetBorderSize() {
-    this.selectedDifficult = this.gameDifficult[0].mine;
+    this.selectedDifficulty = this.gameDifficult[0].mine;
   }
 
   //#endregion
@@ -41,7 +41,7 @@ export class MinesweeperComponent implements OnInit {
   //#region UI events
 
   public setBorderSize(events: any): void {
-    this.selectedDifficult = events.value;
+    this.selectedDifficulty = events.value;
   }
 
   //#endregion
