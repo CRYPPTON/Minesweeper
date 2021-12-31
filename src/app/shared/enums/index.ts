@@ -1,1 +1,2 @@
-export * from './routes-segment';
+export * from './routes-name';
+export * from './dialog-type';

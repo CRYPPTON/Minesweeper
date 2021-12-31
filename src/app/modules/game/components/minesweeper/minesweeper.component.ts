@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { GameLevel } from '@app-models';
 
 @Component({
@@ -12,7 +13,7 @@ export class MinesweeperComponent implements OnInit {
 
   selectedDifficulty: number;
 
-  gameDifficult: GameLevel[] = [
+  gameDifficulty: GameLevel[] = [
     { name: "easy", size: 6, mine: 5 },
     { name: "medium", size: 9, mine: 10 },
     { name: "hard", size: 16, mine: 20 }
@@ -22,7 +23,7 @@ export class MinesweeperComponent implements OnInit {
 
   constructor() { }
 
-  //#region
+  //#region Life cycle hook
 
   ngOnInit(): void {
     this.initSetBorderSize();
@@ -32,15 +33,22 @@ export class MinesweeperComponent implements OnInit {
 
   //#region Init methods
 
+  /**
+   * Set init game difficulty
+   */
   private initSetBorderSize() {
-    this.selectedDifficulty = this.gameDifficult[0].mine;
+    this.selectedDifficulty = this.gameDifficulty[0].mine;
   }
 
   //#endregion
 
   //#region UI events
 
-  public setBorderSize(events: any): void {
+  /**
+   * Set game difficulty.
+   * @param events MatSelectChange object that contain game difficulty value.
+   */
+  public setBorderSize(events: MatSelectChange): void {
     this.selectedDifficulty = events.value;
   }
 
