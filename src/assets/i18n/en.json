@@ -1,3 +1,10 @@
 {
-  "helloWorld": "Hello World"
+  "title": "Minesweeper",
+  "labels": {
+    "chooseDifficulty": "Choose difficulty",
+    "unmarked": "Unmarked"
+  },
+  "easy": "Easy",
+  "medium": "Medium",
+  "hard": "Hard"
 }

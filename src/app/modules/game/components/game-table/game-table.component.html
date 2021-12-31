@@ -1,0 +1,7 @@
+<div class="game-table">
+  <ng-container *ngFor="let row of [].constructor(selectedDifficulty); let i = index">
+    <ng-container *ngFor="let field of [].constructor(selectedDifficulty); let j = index">
+      <app-single-game-fields [row]="i" [col]="j"></app-single-game-fields>
+    </ng-container>
+  </ng-container>
+</div>

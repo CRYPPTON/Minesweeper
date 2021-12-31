@@ -1,3 +1,10 @@
 {
-  "helloWorld": "Zdravo Svete!"
+  "title": "Minesweeper",
+  "labels": {
+    "chooseDifficulty": "Izaberite tezinu",
+    "unmarked": "Neobelezeno"
+  },
+  "easy": "Lako",
+  "medium": "Srednje",
+  "hard": "Tesko"
 }
