@@ -4,8 +4,9 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  cursor: pointer;
   background-color: cadetblue;
+  font-size: 26px;
+  font-weight: 900;
 
   border: solid 1px black;
 
@@ -15,4 +16,21 @@
 
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.white {
+  background-color: white;
+}
+
+.black {
+  background-color: black;
+}
+
+.red {
+  background-color: red;
+}
+
+
+button[disabled]{
+  color: black ;
 }

@@ -5,7 +5,9 @@
     "unmarked": "Unmarked"
   },
   "buttons": {
-    "ok": "OK"
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
   },
   "dialogMessage": {
     "won": "You won!",

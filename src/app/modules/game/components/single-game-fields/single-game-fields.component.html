@@ -1,1 +1,12 @@
-<div matRipple class="field"></div>
+<button
+  (click)="play()"
+  (contextmenu)="setMine($event)"
+  [disabled]="isGameOver || field>=0"
+  [ngClass]="field >= 0 ? 'white' :  isMarked  ? 'red' :  ''"
+  matRipple
+  class="field"
+  >
+  {{ field > 0 ? field : "" }}
+</button>
+<!-- [disabled]="field>=0" -->
+

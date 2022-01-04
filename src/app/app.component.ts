@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { GamePopupHandlerError } from '@app-popup-handlers';
-import { DialogType } from '@app-enums';
 
 @Component({
   selector: 'app-root',
@@ -19,18 +17,4 @@ export class AppComponent {
     // set default language.
     translateService.setDefaultLang('en');
   }
-
-  //#region
-
-  /**
-   * The method is used for testing purposes only.
-   */
-  public onOpenDialog(): void {
-    // throw new GamePopupHandlerError(this.translateService.instant('dialogMessage.lose'), DialogType.lose);
-
-    // test an unknown error.
-    throw new Error();
-  }
-
-  //#endregion
 }

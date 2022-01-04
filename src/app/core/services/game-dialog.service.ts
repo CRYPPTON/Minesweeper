@@ -7,14 +7,16 @@ import { GamePopupComponent } from 'src/app/shared/components/game-popup/game-po
   providedIn: 'root',
 })
 export class GameDialogService {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
-  public openDialog(message: string, dialogType: DialogType): void {
-    this.dialog.open(GamePopupComponent, {
+  public openDialog(message: string, dialogType: DialogType): Promise<boolean> {
+   const dialogPromise = this.dialog.open(GamePopupComponent, {
       data: {
         message: message,
         dialogType: dialogType,
       },
-    });
+    }).afterClosed().toPromise();
+
+    return dialogPromise;
   }
 }

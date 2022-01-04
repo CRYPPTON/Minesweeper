@@ -5,7 +5,9 @@
     "unmarked": "Neobelezeno"
   },
   "buttons": {
-    "ok": "U redu"
+    "ok": "U redu",
+    "yes": "Da",
+    "no": "Ne"
   },
   "dialogMessage": {
     "won": "Pobedili ste!",
