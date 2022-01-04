@@ -10,7 +10,7 @@
   "dialogMessage": {
     "won": "You won!",
     "lose": "You lose!",
-    "unknown": "An unknown error ocurrs"
+    "unknown": "An unknown error occurred!"
   },
   "easy": "Easy",
   "medium": "Medium",

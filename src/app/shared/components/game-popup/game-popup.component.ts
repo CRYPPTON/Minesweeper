@@ -16,7 +16,7 @@ export class GamePopupComponent {
 
   //#endregion
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: GameDialogType) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: GameDialogType) {
     if (data.dialogType == 'won') {
       this.icon = 'check_circle_outline';
       this.styleClass = 'success-icon';
@@ -29,6 +29,4 @@ export class GamePopupComponent {
     }
   }
 
-
 }
-

@@ -10,7 +10,7 @@
   "dialogMessage": {
     "won": "Pobedili ste!",
     "lose": "Izgubili ste!",
-    "unknown": "Nepoznata greska!"
+    "unknown": "Doslo je do nepoznate greske!"
   },
   "easy": "Lako",
   "medium": "Srednje",

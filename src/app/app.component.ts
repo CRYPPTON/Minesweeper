@@ -20,14 +20,16 @@ export class AppComponent {
     translateService.setDefaultLang('en');
   }
 
-  //#region 
+  //#region
 
   /**
    * The method is used for testing purposes only.
    */
   public onOpenDialog(): void {
-    throw new GamePopupHandlerError(this.translateService.instant('dialogMessage.lose'), DialogType.lose);
+    // throw new GamePopupHandlerError(this.translateService.instant('dialogMessage.lose'), DialogType.lose);
 
+    // test an unknown error.
+    throw new Error();
   }
 
   //#endregion
