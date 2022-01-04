@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
+import { GamePopupComponent } from './components/game-popup/game-popup.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    GamePopupComponent
+  ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    TranslateModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    GamePopupComponent
   ]
 })
 export class SharedModule { }

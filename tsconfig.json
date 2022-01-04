@@ -37,6 +37,9 @@
       "@app-pipes": [
         "src/app/core/pipe/"
       ],
+      "@app-popup-handlers": [
+        "src/app/core/popup-handlers/"
+      ]
     },
   },
   "angularCompilerOptions": {

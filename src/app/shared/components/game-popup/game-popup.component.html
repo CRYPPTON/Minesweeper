@@ -1,0 +1,12 @@
+<mat-card class="game-dialog mat-elevation-z0">
+    <mat-icon class="{{ styleClass }}">{{ icon }}</mat-icon>
+    <mat-card-content>
+      <p>{{ data.message }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" mat-dialog-close>
+          {{ "buttons.ok" | translate }}
+        </button>
+    </mat-card-actions>
+  </mat-card>
+  
