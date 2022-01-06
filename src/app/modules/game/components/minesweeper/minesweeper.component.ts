@@ -16,6 +16,10 @@ export class MinesweeperComponent implements OnInit {
   gameDifficulty: GameLevel[];
   level: number;
 
+  get mineNumber(): number {
+    return this.gameEngineService.mineNumber;
+  }
+
   //#endregion
 
   constructor(private gameEngineService: GameEngineService) {
@@ -52,6 +56,7 @@ export class MinesweeperComponent implements OnInit {
   public setBorderSize(events: MatSelectChange): void {
     this.selectedDifficulty = events.value;
     this.gameEngineService.boardSize = this.selectedDifficulty;
+    this.gameEngineService.unmarked$.next(false);
     this.gameEngineService.initGame();
   }
 

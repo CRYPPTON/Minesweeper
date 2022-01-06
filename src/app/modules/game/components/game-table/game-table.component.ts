@@ -6,25 +6,33 @@ import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
   styleUrls: ['./game-table.component.scss']
 })
 export class GameTableComponent implements AfterViewInit, OnChanges {
+
+  //#region Class properties
+
   @Input() selectedDifficulty: number;
+
+  //#endregion
 
   constructor() { }
 
   //#region Life cycle hooks
 
   ngAfterViewInit(): void {
-    this.initBorderSize();
+    this.setBorderSize();
   }
 
   ngOnChanges(): void {
-    this.initBorderSize();
+    this.setBorderSize();
   }
 
   //#endregion
 
   //#region init methods
 
-  private initBorderSize(): void {
+  /**
+   * Set grid for selected board.
+   */
+  private setBorderSize(): void {
     const element = (document.querySelector('.game-table') as HTMLElement);
     element.style.gridTemplateColumns = `repeat(${this.selectedDifficulty}, 1fr)`;
     element.style.gridTemplateRows = `repeat(${this.selectedDifficulty}, 1fr)`
