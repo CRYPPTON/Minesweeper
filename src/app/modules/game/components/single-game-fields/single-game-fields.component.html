@@ -2,10 +2,10 @@
   (click)="play()"
   (contextmenu)="onMarkMines($event)"
   [disabled]="isGameOver || field>=0"
-  [ngClass]="isGameOver && field == 'X'? 'red' : field >= 0 ? 'white' :  isMarked  ? 'red' :  ''"
+  [ngClass]="isGameOver && field === 'X'? 'red' : field >= 0 ? 'white' :  isMarked  ? 'red' :  ''"
   matRipple
   class="field"
   >
-  {{ isGameOver && field == 'X'? 'X' : field > 0 ? field : "" }}
+  {{ isGameOver && field === 'X'? 'X' : field > 0 ? field : "" }}
 </button>
 

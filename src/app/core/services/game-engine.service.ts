@@ -201,6 +201,7 @@ export class GameEngineService {
       );
 
       if (result) {
+        this.unmarked$.next(false);
         this.initGame();
       }
     }
@@ -229,6 +230,7 @@ export class GameEngineService {
         DialogType.won
       );
       if (result) {
+        this.unmarked$.next(false);
         this.initGame();
       }
     }
@@ -283,7 +285,6 @@ export class GameEngineService {
    * @returns random number beetwen 0 and boardSize.
    */
   private randomInteger(): number {
-    // get enum length.
     return Math.floor(Math.random() * this.boardSize);
   }
 

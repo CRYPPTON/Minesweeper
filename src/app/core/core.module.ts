@@ -7,11 +7,11 @@ import { GamePopupHandler } from '@app-popup-handlers';
   imports: [
     CommonModule
   ],
-  providers: [
-    {
-      provide: ErrorHandler,
-      useClass: GamePopupHandler
-    }
-  ]
+  // providers: [
+  //   {
+  //     provide: ErrorHandler,
+  //     useClass: GamePopupHandler
+  //   }
+  // ]
 })
 export class CoreModule { }

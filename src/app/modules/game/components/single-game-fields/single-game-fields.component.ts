@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { GameEngineService } from 'src/app/core/services/game-engine.service';
 import { GameSymbol } from 'src/app/shared/enums/game-symbol';
 
@@ -7,7 +8,7 @@ import { GameSymbol } from 'src/app/shared/enums/game-symbol';
   templateUrl: './single-game-fields.component.html',
   styleUrls: ['./single-game-fields.component.scss'],
 })
-export class SingleGameFieldsComponent {
+export class SingleGameFieldsComponent implements OnInit, OnDestroy {
   //#region Angular stuff
 
   @Input() row: number;
@@ -16,6 +17,8 @@ export class SingleGameFieldsComponent {
   //#endregion
 
   //#region Class properties
+
+  subscription: Subscription;
 
   get isGameOver(): boolean {
     return this.gameEngineService.isGameOver;
@@ -29,12 +32,21 @@ export class SingleGameFieldsComponent {
 
   //#endregion
 
-  constructor(private gameEngineService: GameEngineService) {
-    this.isMarked = false;
-    this.gameEngineService.unmarked$.subscribe(
+  constructor(private gameEngineService: GameEngineService) { }
+
+  //#region Life cycle
+
+  ngOnInit(): void {
+    this.subscription = this.gameEngineService.unmarked$.subscribe(
       (next) => (this.isMarked = next)
     );
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  //#endregion
 
   //#region UI Events
 
