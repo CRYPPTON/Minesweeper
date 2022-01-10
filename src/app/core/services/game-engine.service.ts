@@ -51,7 +51,6 @@ export class GameEngineService {
     this.mineNumber = this.gameDifficulty[this.level].mine;
 
     this.createBoard();
-    console.log(this.board);
     this.generateMine();
   }
 
@@ -246,7 +245,7 @@ export class GameEngineService {
     let board = new Array();
     for (let i = 0; i < this.boardSize; i++) {
       let newArray = new Array()
-      for (let i = 0; i < this.boardSize; i++) {
+      for (let j = 0; j < this.boardSize; j++) {
         newArray.push({
           gameSymbol: '',
           isMarked: false,
