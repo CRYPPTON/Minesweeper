@@ -1,7 +1,21 @@
+{{isGameOver}}
 <div class="game-table">
   <ng-container *ngFor="let row of [].constructor(selectedDifficulty); let i = index">
     <ng-container *ngFor="let field of [].constructor(selectedDifficulty); let j = index">
-      <app-single-game-fields [row]="i" [col]="j"></app-single-game-fields>
-    </ng-container>
+      <button
+      (click)="play(i, j)"
+      (contextmenu)="onMarkMines($event, i, j)"
+      [ngClass]="isGameOver && board[i][j].gameSymbol === 'X'? 'red' : board[i][j].number > 0 ? 'white' :  board[i][j].isMarked  ? 'red' :  ''"
+      matRipple
+      class="field"
+      >
+      {{board[i][j].number}}
+      {{board[i][j].gameSymbol}}
+      <!-- {{ isGameOver && board[i][j].gameSymbol === 'X'? 'X' : board[i][j].number > 0 ? board[i][j].gameSymbol : "" }} -->
+    </button>
   </ng-container>
+</ng-container>
 </div>
+
+<!-- [disabled]="isGameOver || board[i][j]>=0" -->
+<!-- <app-single-game-fields [row]="i" [col]="j"></app-single-game-fields> -->

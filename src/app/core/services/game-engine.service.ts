@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogType } from '@app-enums';
 import { GameSymbol } from '@app-enums';
-import { GameLevel } from '@app-models';
+import { GameField, GameLevel } from '@app-models';
 import { GameDialogService } from '@app-services';
 import { BehaviorSubject } from 'rxjs';
 
@@ -25,7 +25,7 @@ export class GameEngineService {
   isGameOver: boolean;
   level: number;
 
-  board: Array<number[] | GameSymbol[]>;
+  board: Array<any>;
 
   //#endregion
 
@@ -51,6 +51,7 @@ export class GameEngineService {
     this.mineNumber = this.gameDifficulty[this.level].mine;
 
     this.createBoard();
+    console.log(this.board);
     this.generateMine();
   }
 
@@ -163,7 +164,7 @@ export class GameEngineService {
     }
 
     for (i; i < size; i++) {
-      if (this.board[row][i] === GameSymbol.mine) {
+      if (this.board[row][i].gameSymbol === GameSymbol.mine) {
         mines++;
       }
     }
@@ -181,7 +182,7 @@ export class GameEngineService {
    */
   private checkColumn(row: number, col: number): number {
     let mines: number = 0;
-    if (this.board[row][col] === GameSymbol.mine) {
+    if (this.board[row][col].gameSymbol === GameSymbol.mine) {
       mines++;
     }
     return mines;
@@ -213,27 +214,27 @@ export class GameEngineService {
    * @param col number that represents the selected column.
    */
   private checkGameWin = async (): Promise<void> => {
-    let isAllFieldFilled = true;
+    // let isAllFieldFilled = true;
 
-    for (let i = 0; i < this.boardSize; i++) {
-      for (let j = 0; j < this.boardSize; j++) {
-        if (this.board[i][j] === undefined) {
-          isAllFieldFilled = false;
-        }
-      }
-    }
+    // for (let i = 0; i < this.boardSize; i++) {
+    //   for (let j = 0; j < this.boardSize; j++) {
+    //     if (this.board[i][j].gameSymbol === undefined) {
+    //       isAllFieldFilled = false;
+    //     }
+    //   }
+    // }
 
-    if (isAllFieldFilled) {
-      this.isGameOver = true;
-      const result = await this.gameDialogService.openDialog(
-        this.translateService.instant('dialogMessage.won'),
-        DialogType.won
-      );
-      if (result) {
-        this.unmarked$.next(false);
-        this.initGame();
-      }
-    }
+    // if (isAllFieldFilled) {
+    //   this.isGameOver = true;
+    //   const result = await this.gameDialogService.openDialog(
+    //     this.translateService.instant('dialogMessage.won'),
+    //     DialogType.won
+    //   );
+    //   if (result) {
+    //     this.unmarked$.next(false);
+    //     this.initGame();
+    //   }
+    // }
   };
 
   //#region Game utility
@@ -244,7 +245,16 @@ export class GameEngineService {
   public createBoard(): void {
     let board = new Array();
     for (let i = 0; i < this.boardSize; i++) {
-      board.push(new Array(this.boardSize));
+      let newArray = new Array()
+      for (let i = 0; i < this.boardSize; i++) {
+        newArray.push({
+          gameSymbol: '',
+          isMarked: false,
+          number: -1,
+        }
+        )
+      }
+      board.push(newArray);
     }
     this.board = board;
   }
@@ -254,14 +264,13 @@ export class GameEngineService {
    */
   public generateMine(): void {
     let level = this.findDifficulty();
-
     for (let i = 0; i < this.gameDifficulty[level].mine; i++) {
       let row = this.randomInteger();
       let col = this.randomInteger();
-      if (this.board[row][col] == GameSymbol.mine) {
+      if (this.board[row][col].gameSymbol == GameSymbol.mine) {
         i--;
       } else {
-        this.board[row][col] = GameSymbol.mine;
+        this.board[row][col].gameSymbol = GameSymbol.mine;
       }
     }
   }
@@ -296,11 +305,11 @@ export class GameEngineService {
    */
   private setBoard(row: number, col: number, numberOfMines: number): void {
     if (this.isGameOver) {
-      this.board[row][col] = numberOfMines;
+      this.board[row][col].number = numberOfMines;
     } else if (numberOfMines === 0) {
-      this.board[row][col] = GameSymbol.white;
+      this.board[row][col].gameSymbol = GameSymbol.white;
     } else {
-      this.board[row][col] = numberOfMines;
+      this.board[row][col].number = numberOfMines;
     }
   }
 
