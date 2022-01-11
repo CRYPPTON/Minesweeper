@@ -1,4 +1,4 @@
-.game-table {
+.game-board {
   display: grid;
   height: 600px;
   width: 600px;
@@ -17,7 +17,45 @@
 
   @media only screen and (max-width: 500px) {
     grid-template-columns: repeat(1, 1fr);
-    height: 230px;
-    width: 230px;
+    height: 280px;
+    width: 280px;
   }
+}
+
+// board
+
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(207, 207, 207);
+  font-size: 26px;
+  font-weight: 900;
+
+  border: solid 1px black;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button[disabled]{
+  color: black ;
+}
+
+.white {
+  background-color: white;
+}
+
+.black {
+  background-color: black;
+}
+
+.red {
+  background-color: red;
 }

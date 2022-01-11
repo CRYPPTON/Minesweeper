@@ -4,6 +4,16 @@
     "chooseDifficulty": "Izaberite tezinu",
     "unmarked": "Neobelezeno"
   },
+  "buttons": {
+    "ok": "U redu",
+    "yes": "Da",
+    "no": "Ne"
+  },
+  "dialogMessage": {
+    "won": "Pobedili ste!",
+    "lose": "Izgubili ste!",
+    "unknown": "Doslo je do nepoznate greske!"
+  },
   "easy": "Lako",
   "medium": "Srednje",
   "hard": "Tesko"

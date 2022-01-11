@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleGameFieldsComponent } from './single-game-fields.component';
+import { GamePopupComponent } from './game-popup.component';
 
-describe('SingleGameFieldsComponent', () => {
-  let component: SingleGameFieldsComponent;
-  let fixture: ComponentFixture<SingleGameFieldsComponent>;
+describe('GamePopupComponent', () => {
+  let component: GamePopupComponent;
+  let fixture: ComponentFixture<GamePopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleGameFieldsComponent ]
+      declarations: [ GamePopupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleGameFieldsComponent);
+    fixture = TestBed.createComponent(GamePopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

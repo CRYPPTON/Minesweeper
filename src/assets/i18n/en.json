@@ -4,6 +4,16 @@
     "chooseDifficulty": "Choose difficulty",
     "unmarked": "Unmarked"
   },
+  "buttons": {
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "dialogMessage": {
+    "won": "You won!",
+    "lose": "You lose!",
+    "unknown": "An unknown error occurred!"
+  },
   "easy": "Easy",
   "medium": "Medium",
   "hard": "Hard"

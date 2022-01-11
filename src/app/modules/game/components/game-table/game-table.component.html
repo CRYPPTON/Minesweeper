@@ -1,7 +1,41 @@
-<div class="game-table">
-  <ng-container *ngFor="let row of [].constructor(selectedDifficulty); let i = index">
-    <ng-container *ngFor="let field of [].constructor(selectedDifficulty); let j = index">
-      <app-single-game-fields [row]="i" [col]="j"></app-single-game-fields>
+<div class="game-board">
+  <!-- create game board -->
+  <ng-container
+    *ngFor="let row of [].constructor(selectedDifficulty); let i = index"
+  >
+    <ng-container
+      *ngFor="let field of [].constructor(selectedDifficulty); let j = index"
+    >
+      <!-- single board field -->
+      <button
+        (click)="play(i, j)"
+        (contextmenu)="onMarkMines($event, i, j)"
+        [disabled]="
+          isGameOver ||
+          board[i][j].nearMines > 0 ||
+          board[i][j].gameSymbol === 0
+        "
+        [ngClass]="
+          isGameOver && board[i][j].gameSymbol === gameSymbols.mine
+            ? 'red'
+            : board[i][j].nearMines > 0 || board[i][j].gameSymbol === 0
+            ? 'white'
+            : board[i][j].isMarked
+            ? 'red'
+            : ''
+        "
+        matRipple
+        class="field"
+      >
+        {{
+          isGameOver && board[i][j].gameSymbol != 0
+            ? board[i][j].gameSymbol
+            : board[i][j].nearMines > 0
+            ? board[i][j].nearMines
+            : ""
+        }}
+      </button>
+
     </ng-container>
   </ng-container>
 </div>

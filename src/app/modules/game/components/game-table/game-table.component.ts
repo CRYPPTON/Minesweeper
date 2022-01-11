@@ -1,4 +1,7 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { GameEngineService } from '@app-services';
+import { GameSymbol } from 'src/app/shared/enums';
+import { GameField } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-game-table',
@@ -6,30 +9,82 @@ import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angu
   styleUrls: ['./game-table.component.scss']
 })
 export class GameTableComponent implements AfterViewInit, OnChanges {
+
+  //#region Angular stuff
+
   @Input() selectedDifficulty: number;
 
-  constructor() { }
+  //#endregion
+
+  //#region Class properties
+
+  get board(): Array<GameField[]> {
+    return this.gameEngineService.board;
+  }
+
+  get isGameOver(): boolean {
+    return this.gameEngineService.isGameOver;
+  }
+
+  get gameSymbols(): typeof GameSymbol {
+    return GameSymbol;
+  }
+
+  //#endregion
+
+  constructor(private gameEngineService: GameEngineService) { }
 
   //#region Life cycle hooks
 
   ngAfterViewInit(): void {
-    this.initBorderSize();
+    this.setBorderSize();
   }
 
   ngOnChanges(): void {
-    this.initBorderSize();
+    this.setBorderSize();
   }
 
   //#endregion
 
   //#region init methods
 
-  private initBorderSize(): void {
-    const element = (document.querySelector('.game-table') as HTMLElement);
+  /**
+   * Set grid for selected board.
+   */
+  private setBorderSize(): void {
+    const element = (document.querySelector('.game-board') as HTMLElement);
     element.style.gridTemplateColumns = `repeat(${this.selectedDifficulty}, 1fr)`;
     element.style.gridTemplateRows = `repeat(${this.selectedDifficulty}, 1fr)`
   }
 
   //#endregion
 
+  //#region UI Events
+
+  public play(row: number, col: number): void {
+    if (!this.board[row][col].isMarked) {
+      this.gameEngineService.play(row, col);
+    }
+  }
+
+  /**
+   * Marks the possible location of the mine.
+   * @param event a MouseEvent object.
+   */
+  public onMarkMines(event: MouseEvent, row: number, col: number): void {
+    event.preventDefault();
+    if (this.gameEngineService.mineNumber > 0) {
+      this.board[row][col].isMarked = !this.board[row][col].isMarked;
+      this.board[row][col].isMarked
+        ? this.gameEngineService.mineNumber--
+        : this.gameEngineService.mineNumber++;
+    } else {
+      if (this.board[row][col].isMarked) {
+        this.gameEngineService.mineNumber++;
+      }
+      this.board[row][col].isMarked = false;
+    }
+  }
+
+  //#endregion
 }

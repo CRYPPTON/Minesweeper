@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GameLevel } from '@app-models';
+import { MatSelectChange } from '@angular/material/select';
+import { GameEngineService } from '@app-services';
+import { GameLevel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-minesweeper',
@@ -11,18 +13,21 @@ export class MinesweeperComponent implements OnInit {
   //#region Class properties
 
   selectedDifficulty: number;
+  gameDifficulty: GameLevel[];
+  level: number;
 
-  gameDifficult: GameLevel[] = [
-    { name: "easy", size: 6, mine: 5 },
-    { name: "medium", size: 9, mine: 10 },
-    { name: "hard", size: 16, mine: 20 }
-  ];
+  get mineNumber(): number {
+    return this.gameEngineService.mineNumber;
+  }
 
   //#endregion
 
-  constructor() { }
+  constructor(private gameEngineService: GameEngineService) {
+    this.gameDifficulty = this.gameEngineService.gameDifficulty;
+    this.level = 0;
+  }
 
-  //#region
+  //#region Life cycle hook
 
   ngOnInit(): void {
     this.initSetBorderSize();
@@ -32,16 +37,26 @@ export class MinesweeperComponent implements OnInit {
 
   //#region Init methods
 
+  /**
+   * Set init game difficulty
+   */
   private initSetBorderSize() {
-    this.selectedDifficulty = this.gameDifficult[0].mine;
+    this.selectedDifficulty = this.gameDifficulty[this.level].size;
+    this.gameEngineService.boardSize = this.selectedDifficulty;
   }
 
   //#endregion
 
   //#region UI events
 
-  public setBorderSize(events: any): void {
+  /**
+   * Set game difficulty.
+   * @param events MatSelectChange object that contain game difficulty value.
+   */
+  public setBorderSize(events: MatSelectChange): void {
     this.selectedDifficulty = events.value;
+    this.gameEngineService.boardSize = this.selectedDifficulty;
+    this.gameEngineService.initGame();
   }
 
   //#endregion
