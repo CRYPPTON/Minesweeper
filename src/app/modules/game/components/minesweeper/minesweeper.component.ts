@@ -56,7 +56,6 @@ export class MinesweeperComponent implements OnInit {
   public setBorderSize(events: MatSelectChange): void {
     this.selectedDifficulty = events.value;
     this.gameEngineService.boardSize = this.selectedDifficulty;
-    this.gameEngineService.unmarked$.next(false);
     this.gameEngineService.initGame();
   }
 

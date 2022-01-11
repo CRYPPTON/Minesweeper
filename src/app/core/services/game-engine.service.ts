@@ -4,15 +4,13 @@ import { DialogType } from '@app-enums';
 import { GameSymbol } from '@app-enums';
 import { GameField, GameLevel } from '@app-models';
 import { GameDialogService } from '@app-services';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameEngineService {
-  //#region Class properties
 
-  public unmarked$ = new BehaviorSubject<boolean>(false);
+  //#region Class properties
 
   gameDifficulty: GameLevel[] = [
     { name: 'easy', size: 6, mine: 4 },
@@ -25,7 +23,7 @@ export class GameEngineService {
   isGameOver: boolean;
   level: number;
 
-  board: Array<any>;
+  board: Array<GameField[]>;
 
   //#endregion
 
@@ -116,7 +114,7 @@ export class GameEngineService {
         this.checkGameRow(row + 1, col) +
         this.checkColumn(row, col + 1);
     } else if (
-      col === this.board.length &&
+      col === this.board.length - 1 &&
       (row > 0 || row < this.board.length)
     ) {
       //check top, left and bottom.
@@ -193,7 +191,7 @@ export class GameEngineService {
    * @param col number that represents the selected column.
    */
   private checkGameLose = async (row: number, col: number): Promise<void> => {
-    if (this.board[row][col] === GameSymbol.mine) {
+    if (this.board[row][col].gameSymbol === GameSymbol.mine) {
       this.isGameOver = true;
       const result = await this.gameDialogService.openDialog(
         this.translateService.instant('dialogMessage.lose'),
@@ -201,7 +199,6 @@ export class GameEngineService {
       );
 
       if (result) {
-        this.unmarked$.next(false);
         this.initGame();
       }
     }
@@ -213,27 +210,29 @@ export class GameEngineService {
    * @param col number that represents the selected column.
    */
   private checkGameWin = async (): Promise<void> => {
-    // let isAllFieldFilled = true;
+    let isAllFieldFilled = true;
 
-    // for (let i = 0; i < this.boardSize; i++) {
-    //   for (let j = 0; j < this.boardSize; j++) {
-    //     if (this.board[i][j].gameSymbol === undefined) {
-    //       isAllFieldFilled = false;
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < this.boardSize; i++) {
+      for (let j = 0; j < this.boardSize; j++) {
+        if (this.board[i][j].gameSymbol != GameSymbol.mine) {
+          if (this.board[i][j].nearMines === null) {
+            isAllFieldFilled = false;
+            break;
+          }
+        }
+      }
+    }
 
-    // if (isAllFieldFilled) {
-    //   this.isGameOver = true;
-    //   const result = await this.gameDialogService.openDialog(
-    //     this.translateService.instant('dialogMessage.won'),
-    //     DialogType.won
-    //   );
-    //   if (result) {
-    //     this.unmarked$.next(false);
-    //     this.initGame();
-    //   }
-    // }
+    if (isAllFieldFilled) {
+      this.isGameOver = true;
+      const result = await this.gameDialogService.openDialog(
+        this.translateService.instant('dialogMessage.won'),
+        DialogType.won
+      );
+      if (result) {
+        this.initGame();
+      }
+    }
   };
 
   //#region Game utility
@@ -246,11 +245,11 @@ export class GameEngineService {
     for (let i = 0; i < this.boardSize; i++) {
       let newArray = new Array()
       for (let j = 0; j < this.boardSize; j++) {
-        newArray.push({
-          gameSymbol: '',
-          isMarked: false,
-          number: -1,
-        }
+        newArray.push(<GameField><unknown>{
+            gameSymbol: '',
+            isMarked: false,
+            nearMines: null,
+          }
         )
       }
       board.push(newArray);
@@ -304,11 +303,12 @@ export class GameEngineService {
    */
   private setBoard(row: number, col: number, numberOfMines: number): void {
     if (this.isGameOver) {
-      this.board[row][col].number = numberOfMines;
+      this.board[row][col].nearMines = numberOfMines;
     } else if (numberOfMines === 0) {
+      this.board[row][col].nearMines = GameSymbol.white;
       this.board[row][col].gameSymbol = GameSymbol.white;
     } else {
-      this.board[row][col].number = numberOfMines;
+      this.board[row][col].nearMines = numberOfMines;
     }
   }
 

@@ -9,10 +9,14 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div>{{ "labels.unmarked" | translate }}: {{mineNumber}}</div>
+      <div class="d-flex justify-content-center pb-2">
+        {{ "labels.unmarked" | translate }}: {{ mineNumber }}
+      </div>
     </div>
     <div>
-      <app-game-table [selectedDifficulty]="selectedDifficulty"></app-game-table>
+      <app-game-table
+        [selectedDifficulty]="selectedDifficulty"
+      ></app-game-table>
     </div>
   </div>
 </div>

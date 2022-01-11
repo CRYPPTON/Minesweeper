@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
-import { GameEngineService } from 'src/app/core/services';
+import { GameEngineService } from '@app-services';
 import { GameSymbol } from 'src/app/shared/enums';
 import { GameField } from 'src/app/shared/models';
 
@@ -10,23 +10,29 @@ import { GameField } from 'src/app/shared/models';
 })
 export class GameTableComponent implements AfterViewInit, OnChanges {
 
-  //#region Class properties
+  //#region Angular stuff
 
   @Input() selectedDifficulty: number;
 
-  get board(): Array<any> {
-    return this.gameEngineService.board
+  //#endregion
+
+  //#region Class properties
+
+  get board(): Array<GameField[]> {
+    return this.gameEngineService.board;
   }
 
   get isGameOver(): boolean {
     return this.gameEngineService.isGameOver;
   }
 
-  public isMarked: boolean;
+  get gameSymbols(): typeof GameSymbol {
+    return GameSymbol;
+  }
 
   //#endregion
 
-  constructor(private gameEngineService: GameEngineService) {}
+  constructor(private gameEngineService: GameEngineService) { }
 
   //#region Life cycle hooks
 
@@ -46,7 +52,7 @@ export class GameTableComponent implements AfterViewInit, OnChanges {
    * Set grid for selected board.
    */
   private setBorderSize(): void {
-    const element = (document.querySelector('.game-table') as HTMLElement);
+    const element = (document.querySelector('.game-board') as HTMLElement);
     element.style.gridTemplateColumns = `repeat(${this.selectedDifficulty}, 1fr)`;
     element.style.gridTemplateRows = `repeat(${this.selectedDifficulty}, 1fr)`
   }
@@ -56,7 +62,7 @@ export class GameTableComponent implements AfterViewInit, OnChanges {
   //#region UI Events
 
   public play(row: number, col: number): void {
-    if (!this.isMarked) {
+    if (!this.board[row][col].isMarked) {
       this.gameEngineService.play(row, col);
     }
   }
@@ -81,5 +87,4 @@ export class GameTableComponent implements AfterViewInit, OnChanges {
   }
 
   //#endregion
-
 }
